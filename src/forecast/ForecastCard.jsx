@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import WeatherIcon from 'react-icons-weather';
 
 const ForecastCard = ({ forecast, onClick }) => {
@@ -7,6 +7,7 @@ const ForecastCard = ({ forecast, onClick }) => {
     <div className="weatherCard">
       <Card onClick={onClick}>
         <Card.Header>{forecast.day}</Card.Header>
+        <Card.Meta>{forecast.description}</Card.Meta>
         <Card.Content>
           <WeatherComponent iconId={forecast.iconId} />
           <div>

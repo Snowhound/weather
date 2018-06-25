@@ -1,19 +1,20 @@
-.App {
+.app {
   text-align: center;
 }
 
-.App-header {
+.appHeader {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
 }
 
-.App-title {
+.appTitle {
   font-size: 1.5em;
 }
 
-.App-intro {
+.appContent {
+  display: inline-block;
   font-size: large;
 }
 
@@ -30,5 +31,5 @@
 }
 
 .weatherCard {
-  max-width: 180px;
+  max-width: 200px;
 }
