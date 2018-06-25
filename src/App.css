@@ -24,3 +24,11 @@
 .icon {
   padding: 0px 0px 10px 0px;
 }
+
+.group {
+  padding: 20px;
+}
+
+.weatherCard {
+  max-width: 180px;
+}

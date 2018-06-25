@@ -1,38 +1,34 @@
 import React, { Component } from 'react';
+import { Card } from 'semantic-ui-react';
+
 import './App.css';
+import ForecastCard from './ForecastCard';
+import { getDailyForecast } from './services/WeatherService';
 
-import { Card, Icon, Image } from 'semantic-ui-react';
-import WeatherIcon from 'react-icons-weather';
-
-
-
-const WeatherComponent = (props) => {
-  return (
-    <div className="icon">
-      <WeatherIcon name="owm" iconId={props.iconId} flip="horizontal" rotate="90" />
-    </div>
-  )
-}
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      forecasts: [
-        { day: "Mon", iconId: "200", maxDegree: "71", minDegree: "61" },
-        { day: "Tue", iconId: "300", maxDegree: "71", minDegree: "61" },
-        { day: "Wed", iconId: "800", maxDegree: "71", minDegree: "61" },
-        { day: "Thu", iconId: "500", maxDegree: "71", minDegree: "61" },
-        { day: "Fri", iconId: "600", maxDegree: "71", minDegree: "61" }
-      ]
+      forecasts: []
     }
+  }
+
+  componentWillMount() {
+    this.setState({
+      forecasts: getDailyForecast()
+    })
+  }
+
+  onClick(e) {
+    console.log("Clicked");
   }
 
   fiveDayForecast() {
     return (
-      <div>
+      <Card.Group className="group">
         {this.state.forecasts.map((forecast) => this.renderDailyForecast(forecast))}
-      </div>
+      </Card.Group>
     );
   }
 
@@ -41,6 +37,7 @@ class App extends Component {
       <ForecastCard
         key={forecast.day}
         forecast={forecast}
+        onClick={this.onClick}
       />
     );
   }
@@ -57,25 +54,6 @@ class App extends Component {
       </div>
     );
   }
-}
-
-const ForecastCard = ({ forecast }) => {
-  return (<Card>
-    <Card.Header>{forecast.day}</Card.Header>
-    <Card.Content>
-      <WeatherComponent iconId={forecast.iconId} />
-      <div>
-        <span className="degree">
-          {forecast.minDegree} °C
-      </span>
-        -
-      <span className="degree">
-          {forecast.maxDegree} °C
-      </span>
-      </div>
-    </Card.Content>
-  </Card>
-  );
 }
 
 export default App;
