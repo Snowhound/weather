@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Segment, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
+import { Card, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import ForecastCard from './ForecastCard';
@@ -9,12 +9,14 @@ import { getDailyForecastFromAPI } from '../services/WeatherService';
 class ForecastPage extends Component {
     constructor(props) {
         super(props);
-        this.state = this.initialState(props);
+        const city = props.match.params.city || "tartu";
+        this.state = this.initialState(city);
     }
 
     componentWillReceiveProps(props) {
-        if (this.props.city != props.city) {
-            this.setState(this.initialState(props));
+        const city = props.match.params.city || "tartu";
+        if (this.state.city !== city) {
+            this.setState(this.initialState(city));
             this.updateForecasts();
         }
     }
@@ -23,8 +25,7 @@ class ForecastPage extends Component {
         this.updateForecasts();
     }
 
-    initialState(props) {
-        const city = props.match.params.city || "tartu";
+    initialState(city) {
         return {
             loading: true,
             forecasts: [],
@@ -61,9 +62,8 @@ class ForecastPage extends Component {
 
     renderDailyForecast(forecast) {
         return (
-            <Link to={`/forecast/${this.state.city}/hourly`}>
+            <Link key={forecast.day} to={`/forecast/${this.state.city}/hourly`}>
                 <ForecastCard
-                    key={forecast.day}
                     forecast={forecast}
                 />
             </Link>
