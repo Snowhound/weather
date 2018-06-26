@@ -15,9 +15,17 @@ export const getHourlyForecast = (city, day) => {
     const params = { q: `${city},EE` };
 
     return API.get('/forecast', { params: params })
-        .then((response) => mapHourlyForecast(response.data, day))
+        .then((response) => mapHourlyForecast(response.data))
         .catch(console.error);
 
+}
+
+export const getCurrentForecast = (city) => {
+    const params = { q: `${city},EE`};
+
+    return API.get('/weather', { params: params })
+        .then((response) => mapCurrentForecast(response.data))
+        .catch(console.error);
 }
 
 const mapDailyForecast = (data) => {
@@ -54,4 +62,12 @@ export const mapHourlyForecast = (data, day) => {
     });
   
     return results;
+}
+
+export const mapCurrentForecast = (data) => {
+    return ({
+        temp: data.main.temp,
+        description: data.weather[0].description,
+        iconId: data.weather[0].id.toString()
+    });
 }

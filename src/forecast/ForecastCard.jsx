@@ -25,7 +25,7 @@ const ForecastCard = ({ forecast, onClick }) => {
   );
 }
 
-const WeatherComponent = (props) => {
+export const WeatherComponent = (props) => {
   return (
     <div className="icon">
       <WeatherIcon name="owm" iconId={props.iconId} flip="horizontal" rotate="90" />
