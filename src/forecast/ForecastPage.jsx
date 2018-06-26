@@ -48,21 +48,20 @@ class ForecastPage extends Component {
             });
     }
 
-    onClick(e) {
-
-    }
-
     fiveDayForecast() {
         return (
-            <Card.Group className="group">
-                {this.state.forecasts.map((forecast) => this.renderDailyForecast(forecast))}
+            <Card.Group className="group" centered>
+                {this.state.forecasts.map((forecast, index) => this.renderDailyForecast(forecast, index))}
             </Card.Group>
         );
     }
 
-    renderDailyForecast(forecast) {
+    renderDailyForecast(forecast, index) {
         return (
-            <Link key={forecast.day} to={`/forecast/${this.state.city}/hourly`}>
+            <Link 
+                key={forecast.day} 
+                to={`/forecast/${this.state.city}/hourly/${index}`}
+            >
                 <ForecastCard
                     forecast={forecast}
                 />

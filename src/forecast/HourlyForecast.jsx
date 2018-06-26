@@ -1,64 +1,84 @@
 import React, { Component } from 'react';
-import { Container, Table, Icon } from 'semantic-ui-react';
+import { Container, Dimmer, Loader } from 'semantic-ui-react';
+import moment from 'moment';
+import { LineChart } from 'react-chartkick';
 
-const TableExampleCelledStriped = () => (
-  <Table celled striped>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell colSpan='3'>Git Repository</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-
-    <Table.Body>
-      <Table.Row>
-        <Table.Cell collapsing>
-          <Icon name='folder' /> node_modules
-        </Table.Cell>
-        <Table.Cell>Initial commit</Table.Cell>
-        <Table.Cell collapsing textAlign='right'>
-          10 hours ago
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>
-          <Icon name='folder' /> test
-        </Table.Cell>
-        <Table.Cell>Initial commit</Table.Cell>
-        <Table.Cell textAlign='right'>10 hours ago</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>
-          <Icon name='folder' /> build
-        </Table.Cell>
-        <Table.Cell>Initial commit</Table.Cell>
-        <Table.Cell textAlign='right'>10 hours ago</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>
-          <Icon name='file outline' /> package.json
-        </Table.Cell>
-        <Table.Cell>Initial commit</Table.Cell>
-        <Table.Cell textAlign='right'>10 hours ago</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>
-          <Icon name='file outline' /> Gruntfile.js
-        </Table.Cell>
-        <Table.Cell>Initial commit</Table.Cell>
-        <Table.Cell textAlign='right'>10 hours ago</Table.Cell>
-      </Table.Row>
-    </Table.Body>
-  </Table>
-)
+import { getHourlyForecast } from '../services/WeatherService';
 
 class HourlyForecast extends Component {
-    render() {
-      return (
-        <Container>
-            <TableExampleCelledStriped />
-        </Container>
-      );
+    constructor(props) {
+        super(props);
+        this.state = this.initialState(props);
     }
-  }
 
-  export default HourlyForecast;
+    componentWillMount() {
+        this.updateHourlyForecasts(this.state);
+    }
+
+    componentWillReceiveProps(props) {
+        const city = props.match.params.city || "tartu";
+        const index = props.match.params.index;
+        if (this.state.city !== city || this.state.index !== index) {
+            const state = this.initialState(props);
+            this.setState(state);
+            this.updateHourlyForecasts(state);
+        }
+    }
+
+    initialState(props) {
+        const city = props.match.params.city || "tartu";
+        const index = props.match.params.index;
+        const day = moment().add(index, 'd').startOf('day');
+        return {
+            loading: true,
+            index: index,
+            day: day,
+            city: city,
+            cityName: this.capitalizeFirstLetter(city),
+            forecasts: []
+        }
+    }
+
+    updateHourlyForecasts(state) {
+        getHourlyForecast(state.cityName, state.day)
+            .then((forecasts) => {
+                this.setState({
+                    loading: false,
+                    forecasts: forecasts
+                })
+            });
+    }
+
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    mapForecastToChart() {
+        const hourlyForecasts = this.state.forecasts;
+        const chartData = {};
+        hourlyForecasts.map((forecast) => {
+            chartData[forecast.time] = forecast.temp
+        });
+        return chartData;
+    }
+
+    renderLineChart() {
+        if (!this.state.loading) {
+            return <LineChart data={this.mapForecastToChart()} />
+        }
+        return null;
+    }
+
+    render() {
+        return (
+            <Container>
+                <Dimmer active={this.state.loading} inverted>
+                    <Loader inverted>Loading</Loader>
+                </Dimmer>
+                {this.renderLineChart()}
+            </Container>
+        );
+    }
+}
+
+export default HourlyForecast;

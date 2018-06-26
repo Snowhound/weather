@@ -1,12 +1,8 @@
 import moxios from 'moxios';
-import moment from 'moment';
-import API, { baseURL, defaultParams } from '../API';
 
-import {
-    getDailyForecast,
-    weekDayStrFromTimestamp,
-    mapHourlyForecast
-} from '../WeatherService';
+import API, { baseURL } from '../API';
+import { weekDayStrFromTimestamp, dateFromTimestamp } from "../DateUtil";
+import { getDailyForecast, mapHourlyForecast } from '../WeatherService';
 import dailyTestData from './dailyTestData';
 import hourlyTestData from './hourlyTestData';
 
@@ -40,7 +36,7 @@ describe('WeatherService', () => {
     })
 
     it('mapHourlyForecast', () => {
-        const day = moment(1530414000 * 1000).startOf('day');
+        const day = dateFromTimestamp(1530414000).startOf('day');
         const expected = [
             { "description": "few clouds", "iconId": "801", "maxDegree": "14.8", "minDegree": "14.8", "temp": 14.82, "time": "00:00" },
             { "description": "scattered clouds", "iconId": "802", "maxDegree": "14.0", "minDegree": "14.0", "temp": 14, "time": "03:00" },

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+import ReactChartkick from 'react-chartkick';
+import Chart from 'chart.js';
 
 import AppMenu from './AppMenu';
-import NotFoundPage from './NotFoundPage';
 import ForecastPage from './forecast/ForecastPage';
 import './App.css';
 import HourlyForecast from './forecast/HourlyForecast';
+import WelcomePage from './WelcomePage';
+
+ReactChartkick.addAdapter(Chart);
 
 
 class App extends Component {
@@ -21,9 +25,9 @@ class App extends Component {
             <div>
               <AppMenu />
               {/* TODO notFound page etc */}
-                <Route exact path="/" component={ForecastPage} />
+                <Route exact path="/" component={WelcomePage} />
                 <Route path="/forecast/:city" component={ForecastPage} />
-                <Route exact path="/forecast/:city/hourly" component={HourlyForecast} />
+                <Route exact path="/forecast/:city/hourly/:index" component={HourlyForecast} />
             </div>
           </BrowserRouter>
         </div>

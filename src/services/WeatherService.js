@@ -1,38 +1,23 @@
-import API from './API';
-import moment from 'moment';
+import { dateFromTimestamp, weekDayStrFromTimestamp } from "./DateUtil";
 
-const days = {
-    0: "Sun",
-    1: "Mon",
-    2: "Tue",
-    3: "Wed",
-    4: "Thu",
-    5: "Fri",
-    6: "Sat"
-}
+import API from './API';
 
 export const getDailyForecast = (city) => {
-    const params = {
-        q: city + ",EE",
-        cnt: "5"
-    };
+    const params = { q: `${city},EE`, cnt: "5" };
 
-    const apiPromise = API.get('/forecast/daily', { params: params })
+    return API.get('/forecast/daily', { params: params })
         .then((response) => mapDailyForecast(response.data))
         .catch(console.error);
 
-    return apiPromise;
-
 }
 
-export const weekDayStrFromTimestamp = (dt) => {
-    const date = new Date(dt * 1000); //From seconds to milliseconds
-    const dayAsNumber = date.getDay();
-    return days[dayAsNumber];
-}
+export const getHourlyForecast = (city, day) => {
+    const params = { q: `${city},EE` };
 
-const dateFromTimestamp = (dt) => {
-    return moment(dt * 1000);
+    return API.get('/forecast', { params: params })
+        .then((response) => mapHourlyForecast(response.data, day))
+        .catch(console.error);
+
 }
 
 const mapDailyForecast = (data) => {
@@ -51,10 +36,11 @@ const mapDailyForecast = (data) => {
 
 export const mapHourlyForecast = (data, day) => {
     const filteredByDay = data.list.filter((listItem) => {
+        const listItemDay = dateFromTimestamp(listItem.dt).startOf('day');
         return dateFromTimestamp(listItem.dt).startOf('day').isSame(day);
     });
 
-    return filteredByDay.map((listItem) => {
+    const results = filteredByDay.map((listItem) => {
         const weather = listItem.weather[0];
         const time = dateFromTimestamp(listItem.dt).format('HH:mm');
         return {
@@ -66,4 +52,6 @@ export const mapHourlyForecast = (data, day) => {
             description: weather.description
         };
     });
+  
+    return results;
 }
