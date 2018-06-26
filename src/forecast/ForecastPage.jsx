@@ -3,7 +3,7 @@ import { Card, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import ForecastCard from './ForecastCard';
-import { getDailyForecastFromAPI } from '../services/WeatherService';
+import { getDailyForecast } from '../services/WeatherService';
 
 
 class ForecastPage extends Component {
@@ -39,7 +39,7 @@ class ForecastPage extends Component {
     }
 
     updateForecasts() {
-        getDailyForecastFromAPI(this.state.cityName)
+        getDailyForecast(this.state.cityName)
             .then((forecasts) => {
                 this.setState({
                     loading: false,
