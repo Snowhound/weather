@@ -29,6 +29,7 @@ class HourlyForecast extends Component {
         const city = props.match.params.city || "tartu";
         const index = props.match.params.index;
         const day = moment().add(index, 'd').startOf('day');
+        console.log(day);
         return {
             loading: true,
             index: index,
