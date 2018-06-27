@@ -1,10 +1,12 @@
 import moxios from 'moxios';
+import moment from 'moment';
 
 import API, { baseURL } from '../API';
 import { weekDayStrFromTimestamp, dateFromTimestamp } from "../DateUtil";
-import { getDailyForecast, mapHourlyForecast } from '../WeatherService';
+import { getDailyForecast, mapHourlyForecast, getHourlyForecast } from '../WeatherService';
 import dailyTestData from './dailyTestData';
 import hourlyTestData from './hourlyTestData';
+import currentTestData from './currentTestData';
 
 const expectedItem = {
     day: "Mon",
@@ -36,7 +38,7 @@ describe('WeatherService', () => {
     })
 
     it('mapHourlyForecast', () => {
-        const day = dateFromTimestamp(1530414000).startOf('day');
+        const day = moment().year(2018).month(6).date(1).startOf('day');
         const expected = [
             { "description": "few clouds", "iconId": "801", "maxDegree": "14.8", "minDegree": "14.8", "temp": 14.82, "time": "00:00" },
             { "description": "scattered clouds", "iconId": "802", "maxDegree": "14.0", "minDegree": "14.0", "temp": 14, "time": "03:00" },
@@ -45,5 +47,46 @@ describe('WeatherService', () => {
         ];
 
         expect(expected).toEqual(mapHourlyForecast(hourlyTestData, day));
+    })
+
+    it('getHourlyForecast', () => {
+        const url = baseURL + '/forecast?units=metric&APPID=886268d885e2614466725dcf8b9589c5&q=Tartu,EE';
+        moxios.stubRequest(url, {
+            response: hourlyTestData
+        });
+
+        const day = moment().year(2018).month(5).date(26).startOf('day');
+        const expected = {
+            time: "12:00",
+            minDegree: 19.42.toFixed(1),
+            maxDegree: 20.24.toFixed(1),
+            temp: 20.24,
+            iconId: "800",
+            description: "clear sky"
+        };
+
+        return getHourlyForecast("Tartu", day).then((hourlyForecast) => {
+            expect(hourlyForecast[0]).toEqual(expected);
+        });
+    })
+
+    it('getCurrentForecast', () => {
+        const url = baseURL + '/weather?units=metric&APPID=886268d885e2614466725dcf8b9589c5&q=Tartu,EE';
+        moxios.stubRequest(url, {
+            response: currentTestData
+        });
+
+        const expected = {
+            time: "12:00",
+            minDegree: 19.42.toFixed(1),
+            maxDegree: 20.24.toFixed(1),
+            temp: 20.24,
+            iconId: "800",
+            description: "clear sky"
+        };
+
+        return getHourlyForecast("Tartu", day).then((hourlyForecast) => {
+            expect(hourlyForecast[0]).toEqual(expected);
+        });
     })
 })

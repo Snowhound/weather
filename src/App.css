@@ -34,3 +34,12 @@
 .weatherCard {
   max-width: 200px;
 }
+
+.cityName {
+  padding-top: 5px;
+  font-size: 25px;
+}
+
+.mainPageIcon {
+  padding: 0px 0px 0px 0px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
-import {WeatherComponent} from './ForecastCard';
+import { WeatherComponent } from './ForecastCard';
 import { getCurrentForecast } from '../services/WeatherService';
 
 class CurrentForecast extends React.Component {
@@ -9,7 +9,7 @@ class CurrentForecast extends React.Component {
 
         this.state = {
             forecast: {},
-            cityName: this.capitalizeFirstLetter("Tartu"),
+            cityName: this.capitalizeFirstLetter(this.props.city),
             loading: true
         }
     }
@@ -32,16 +32,27 @@ class CurrentForecast extends React.Component {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    renderWeatherComponent() {
+        if (this.state.forecast.iconId) {
+            return (
+                <Card.Content>
+                    <div className="mainPageIcon">
+                        <WeatherComponent iconId={this.state.forecast.iconId} />
+                    </div>
+                </Card.Content>
+            );
+        }
+        return null;
+    }
+
     render() {
         return (
             <div className="weatherCard">
                 <Card>
+                    <Card.Header className="cityName">{this.state.cityName}</Card.Header>
                     <Card.Meta>{this.state.forecast.description}</Card.Meta>
-                    <Card.Content>
-                        //iconId tuleb undefined, kuigi saadakse samast kohast, kust description (see tuleb välja)
-                        <WeatherComponent iconId={this.state.forecast.iconId} />
-                    </Card.Content>
-                    {this.state.forecast.temp}
+                    {this.renderWeatherComponent()}
+                    {this.state.forecast.temp} °C
                 </Card>
             </div>
         );

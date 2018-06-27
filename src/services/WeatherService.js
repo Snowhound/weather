@@ -15,7 +15,7 @@ export const getHourlyForecast = (city, day) => {
     const params = { q: `${city},EE` };
 
     return API.get('/forecast', { params: params })
-        .then((response) => mapHourlyForecast(response.data))
+        .then((response) => mapHourlyForecast(response.data, day))
         .catch(console.error);
 
 }
@@ -43,8 +43,8 @@ const mapDailyForecast = (data) => {
 }
 
 export const mapHourlyForecast = (data, day) => {
+
     const filteredByDay = data.list.filter((listItem) => {
-        const listItemDay = dateFromTimestamp(listItem.dt).startOf('day');
         return dateFromTimestamp(listItem.dt).startOf('day').isSame(day);
     });
 
