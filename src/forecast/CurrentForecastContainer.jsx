@@ -36,9 +36,7 @@ class CurrentForecastContainer extends React.Component {
         return (
             <CurrentForecast 
             cityName = {this.state.cityName}
-            description = {this.state.forecast.description}
-            temp = {this.state.forecast.temp}
-            iconId = {this.state.forecast.iconId}
+            forecast = {this.state.forecast}
             />
 
         );

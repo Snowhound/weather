@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 import { WeatherComponent } from './ForecastCard';
 
@@ -8,12 +9,12 @@ const CurrentForecast = (props) => {
         <div className="mainPageWeatherCard">
             <Card>
                 <Card.Header className="cityName">{props.cityName}</Card.Header>
-                <Card.Meta>{props.description}</Card.Meta>
+                <Card.Meta>{props.forecast.description}</Card.Meta>
                 <CurrentWeatherComponent 
-                iconId = {props.iconId}
+                    iconId = {props.forecast.iconId}
                 />
                 <div className="temperature">
-                    {props.temp} °C
+                    {props.forecast.temp} °C
                 </div>
             </Card>
         </div>);
@@ -30,6 +31,11 @@ const CurrentWeatherComponent = (props) => {
         );
     }
     return null;
+}
+
+CurrentForecast.propTypes = {
+    cityName: PropTypes.string.isRequired,
+    forecasts: PropTypes.array.isRequired,
 }
 
 export default CurrentForecast;
