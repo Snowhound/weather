@@ -1,4 +1,4 @@
-const exampleHourlyData = {
+const hourlyTestData = {
     "cod": "200",
         "message": 0.0022,
             "cnt": 40,
@@ -1331,4 +1331,4 @@ const exampleHourlyData = {
     }
 }
 
-export default exampleHourlyData;
+export default hourlyTestData;

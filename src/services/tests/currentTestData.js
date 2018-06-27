@@ -1,4 +1,4 @@
-const exampleCurrentData = {
+const currentTestData = {
     "coord": {
         "lon": 26.72,
         "lat": 58.37
@@ -40,3 +40,5 @@ const exampleCurrentData = {
     "name": "Tartu",
     "cod": 200
 }
+
+export default currentTestData;

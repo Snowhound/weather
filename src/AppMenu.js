@@ -8,6 +8,12 @@ class AppMenu extends React.Component {
         return (
             <Menu pointing secondary>
                 <Menu.Item
+                    name='Home'
+                    onClick={() => {
+                        this.props.history.push("");
+                    }}
+                />
+                <Menu.Item
                     name='Tartu'
                     onClick={() => {
                         console.log(this.props.history);

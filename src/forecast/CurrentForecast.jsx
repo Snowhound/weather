@@ -47,12 +47,14 @@ class CurrentForecast extends React.Component {
 
     render() {
         return (
-            <div className="weatherCard">
+            <div className="mainPageWeatherCard">
                 <Card>
                     <Card.Header className="cityName">{this.state.cityName}</Card.Header>
                     <Card.Meta>{this.state.forecast.description}</Card.Meta>
                     {this.renderWeatherComponent()}
-                    {this.state.forecast.temp} °C
+                    <div className="temperature">
+                        {this.state.forecast.temp} °C
+                    </div>
                 </Card>
             </div>
         );

@@ -9,7 +9,9 @@ const ForecastCard = ({ forecast, onClick }) => {
         <Card.Header>{forecast.day}</Card.Header>
         <Card.Meta>{forecast.description}</Card.Meta>
         <Card.Content>
-          <WeatherComponent iconId={forecast.iconId} />
+          <div className="icon">
+            <WeatherComponent iconId={forecast.iconId} />
+          </div>
           <div>
             <span className="degree">
               {forecast.minDegree} °C
@@ -27,9 +29,7 @@ const ForecastCard = ({ forecast, onClick }) => {
 
 export const WeatherComponent = (props) => {
   return (
-    <div className="icon">
-      <WeatherIcon name="owm" iconId={props.iconId} flip="horizontal" rotate="90" />
-    </div>
+    <WeatherIcon name="owm" iconId={props.iconId} flip="horizontal" rotate="90" />
   )
 }
 

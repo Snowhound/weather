@@ -18,16 +18,18 @@ class App extends Component {
     return (
       <div className="app">
         <header className="appHeader">
-          <h1 className="appTitle">WeatherApp</h1>
+          <video autoPlay loop muted>
+            <source src="/HeaderVideo.mp4" type="video/mp4" />
+          </video>
         </header>
         <div>
           <BrowserRouter>
             <div>
               <AppMenu />
-              {/* TODO notFound page etc */}
                 <Route exact path="/" component={WelcomePage} />
                 <Route path="/forecast/:city" component={ForecastPage} />
-                <Route exact path="/forecast/:city/hourly/:index" component={HourlyForecast} />
+                <Route exact path="/forecast/:city/hourly/:index" component={HourlyForecast} 
+                />
             </div>
           </BrowserRouter>
         </div>

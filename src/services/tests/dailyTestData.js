@@ -1,4 +1,4 @@
-const exampleData = {
+const dailyTestData = {
     "city": {
         "id": 588335,
         "name": "Tartu",
@@ -136,4 +136,4 @@ const exampleData = {
     ]
 }
 
-export default exampleData;
+export default dailyTestData;

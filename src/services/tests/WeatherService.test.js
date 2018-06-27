@@ -3,7 +3,12 @@ import moment from 'moment';
 
 import API, { baseURL } from '../API';
 import { weekDayStrFromTimestamp, dateFromTimestamp } from "../DateUtil";
-import { getDailyForecast, mapHourlyForecast, getHourlyForecast } from '../WeatherService';
+import {
+    getDailyForecast,
+    mapHourlyForecast,
+    getHourlyForecast,
+    getCurrentForecast
+} from '../WeatherService';
 import dailyTestData from './dailyTestData';
 import hourlyTestData from './hourlyTestData';
 import currentTestData from './currentTestData';
@@ -34,7 +39,7 @@ describe('WeatherService', () => {
     })
 
     it('getDayFromTimestamp', () => {
-        expect("Sat").toEqual(weekDayStrFromTimestamp(1487415600));
+        expect(weekDayStrFromTimestamp(1487415600)).toEqual("Sat");
     })
 
     it('mapHourlyForecast', () => {
@@ -46,7 +51,7 @@ describe('WeatherService', () => {
             { "description": "light rain", "iconId": "500", "maxDegree": "16.3", "minDegree": "16.3", "temp": 16.32, "time": "09:00" }
         ];
 
-        expect(expected).toEqual(mapHourlyForecast(hourlyTestData, day));
+        expect(mapHourlyForecast(hourlyTestData, day)).toEqual(expected);
     })
 
     it('getHourlyForecast', () => {
@@ -77,16 +82,13 @@ describe('WeatherService', () => {
         });
 
         const expected = {
-            time: "12:00",
-            minDegree: 19.42.toFixed(1),
-            maxDegree: 20.24.toFixed(1),
-            temp: 20.24,
+            temp: 20.0,
             iconId: "800",
             description: "clear sky"
         };
 
-        return getHourlyForecast("Tartu", day).then((hourlyForecast) => {
-            expect(hourlyForecast[0]).toEqual(expected);
+        return getCurrentForecast("Tartu").then((currentForecast) => {
+            expect(currentForecast).toEqual(expected);
         });
     })
 })

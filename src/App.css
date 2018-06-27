@@ -3,10 +3,10 @@
 }
 
 .appHeader {
-  background-color: #222;
   height: 150px;
-  padding: 20px;
-  color: white;
+  max-height: 150px;
+  background-color: #3e62a4;
+  overflow: hidden;
 }
 
 .appTitle {
@@ -36,10 +36,20 @@
 }
 
 .cityName {
-  padding-top: 5px;
+  padding-top: 10px;
   font-size: 25px;
 }
 
 .mainPageIcon {
   padding: 0px 0px 0px 0px;
+  font-size: 40px;
+}
+
+.temperature {
+  padding-bottom: 10px;
+}
+
+.mainPageWeatherCard {
+  max-width: 250px;
+  padding: 20px;
 }
