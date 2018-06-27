@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import DailyForecast from './DailyForecast';
+import DailyForecast from './DailyForecastContainer';
 import HourlyForecast from './HourlyForecast';
 
 const ForecastPage = ({match}) => {

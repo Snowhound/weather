@@ -1,86 +1,60 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import ForecastCard from './ForecastCard';
-import { getDailyForecast } from '../services/WeatherService';
 
-
-class DailyForecast extends Component {
-    constructor(props) {
-        super(props);
-        const city = props.match.params.city || "tartu";
-        this.state = this.initialState(city);
-    }
-
-    componentWillReceiveProps(props) {
-        const city = props.match.params.city || "tartu";
-        if (this.state.city !== city) {
-            this.setState(this.initialState(city));
-            this.updateForecasts();
-        }
-    }
-
-    componentWillMount() {
-        this.updateForecasts();
-    }
-
-    initialState(city) {
-        return {
-            loading: true,
-            forecasts: [],
-            city: city,
-            cityName: this.capitalizeFirstLetter(city)
-        }
-    }
-
-    capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    updateForecasts() {
-        getDailyForecast(this.state.cityName)
-            .then((forecasts) => {
-                this.setState({
-                    loading: false,
-                    forecasts: forecasts
+const FiveDayForecast = (props) => {
+    return (
+        <Card.Group className="group" centered>
+            {props.forecasts.map(
+                (forecast, index) => {
+                    return (
+                        <DailyForecastCard
+                            forecast={forecast}
+                            index={index}
+                            city={props.city}
+                        />);
                 })
-            });
-    }
+            }
+        </Card.Group>
+    );
+}
 
-    fiveDayForecast() {
-        return (
-            <Card.Group className="group" centered>
-                {this.state.forecasts.map((forecast, index) => this.renderDailyForecast(forecast, index))}
-            </Card.Group>
-        );
-    }
+const DailyForecastCard = ({ city, forecast, index }) => {
+    return (
+        <Link
+            key={forecast.day}
+            to={`/forecast/${city}/hourly/${index}`}
+        >
+            <ForecastCard
+                forecast={forecast}
+            />
+        </Link>
+    );
+}
 
-    renderDailyForecast(forecast, index) {
-        return (
-            <Link 
-                key={forecast.day} 
-                to={`/forecast/${this.state.city}/hourly/${index}`}
-            >
-                <ForecastCard
-                    forecast={forecast}
-                />
-            </Link>
-        );
-    }
+const DailyForecast = (props) => {
+    return (
+        <Container>
+            <Header as='h2'>Forecast of {props.cityName}</Header>
+            <Dimmer active={props.loading} inverted>
+                <Loader inverted>Loading</Loader>
+            </Dimmer>
+            <FiveDayForecast
+                city={props.city}
+                forecasts={props.forecasts}
+            />
+        </Container>
+    );
+}
 
-    render() {
-        return (
-            <Container>
-                <Header as='h2'>Forecast of {this.state.cityName}</Header>
-                <Dimmer active={this.state.loading} inverted>
-                    <Loader inverted>Loading</Loader>
-                </Dimmer>
-
-                {this.fiveDayForecast()}
-            </Container>
-        );
-    }
+DailyForecast.propTypes = {
+    city: PropTypes.string.isRequired,
+    cityName: PropTypes.string.isRequired,
+    forecasts: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
 }
 
 export default DailyForecast;
