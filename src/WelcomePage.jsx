@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import CurrentForecast from './forecast/CurrentForecast';
+import CurrentForecastContainer from './forecast/CurrentForecastContainer';
 
 class WelcomePage extends React.Component {
     render() {
@@ -12,12 +12,12 @@ class WelcomePage extends React.Component {
                     <Link
                         to={"/forecast/tartu"}
                     >
-                        <CurrentForecast city="Tartu" />
+                        <CurrentForecastContainer city="Tartu" />
                     </Link>
                     <Link
                         to={"/forecast/tallinn"}
                     >
-                        <CurrentForecast city="Tallinn" />
+                        <CurrentForecastContainer city="Tallinn" />
                     </Link>
 
                 </Card.Group>
