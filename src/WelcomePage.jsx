@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import CurrentForecastContainer from './forecast/CurrentForecastContainer';
+import CurrentForecastContainer from './forecast/current/CurrentForecastContainer';
 
 class WelcomePage extends React.Component {
     render() {

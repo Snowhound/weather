@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-import { WeatherComponent } from './ForecastCard';
+import { WeatherComponent } from '../ForecastCard';
 
 const CurrentForecast = (props) => {
     return (

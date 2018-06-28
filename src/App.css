@@ -54,11 +54,15 @@
   padding: 20px;
 }
 
-.logoLocation{
-  text-align: left;
-  display: inline-flex;
+.footer {
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  padding-top: 400px;
+  padding-bottom: 20px;
+  color: gray;
 }
 
-.logo {
-  width: 175px;
+.content {
+  min-height: 100%;
 }

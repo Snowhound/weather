@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import HourlyForecast from './HourlyForecast';
-import { getHourlyForecast } from '../services/WeatherService';
+import { getHourlyForecast } from '../../services/WeatherService';
 
 class HourlyForecastContainer extends Component {
     constructor(props) {

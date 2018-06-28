@@ -3,7 +3,7 @@ import { Card, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import ForecastCard from './ForecastCard';
+import ForecastCard from '../ForecastCard';
 
 const FiveDayForecast = (props) => {
     return (

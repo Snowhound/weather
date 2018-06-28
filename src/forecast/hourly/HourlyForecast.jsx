@@ -3,7 +3,7 @@ import { Container, Dimmer, Loader } from 'semantic-ui-react';
 import { LineChart } from 'react-chartkick';
 import PropTypes from 'prop-types';
 
-import { fullDays } from '../services/DateUtil';
+import { fullDays } from '../../services/DateUtil';
 
 
 
@@ -32,7 +32,9 @@ const mapForecastToChart = (hourlyForecasts) => {
 
 const HourlyLineChart = (props) => {
     if (!props.loading) {
-        return <LineChart data={mapForecastToChart(props.forecasts)} />
+        return <LineChart 
+        ytitle="Temperature °C"
+        data={mapForecastToChart(props.forecasts)} />
     }
     return null;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ReactChartkick from 'react-chartkick';
 import Chart from 'chart.js';
+import { Image } from 'semantic-ui-react';
 
 import AppMenu from './AppMenu';
 import ForecastPage from './forecast/ForecastPage';
@@ -17,27 +18,25 @@ class App extends Component {
     return (
       <div className="app">
         <header className="appHeader">
-          <div className="logoLocation">
-          <span>
-            <img src="/SH_logo.svg" className="logo" alt="logo" />
-            </span>
-            <span>
-            <video autoPlay loop muted>
-              <source src="/HeaderVideo.mp4" type="video/mp4" />
-            </video>
-            </span>
-          </div>
-
+          <video autoPlay loop muted>
+            <source src="/HeaderVideo.mp4" type="video/mp4" />
+          </video>
         </header>
-        <div>
-            <div>
-              <AppMenu />
-              <Switch>
-                <Route exact path="/" component={WelcomePage} />
-                <Route path="/forecast" component={ForecastPage} />
-                <Route component={NotFoundPage} />
-              </Switch>
-            </div>
+        <div className="content">
+          <div>
+            <AppMenu />
+            <Switch>
+              <Route exact path="/" component={WelcomePage} />
+              <Route path="/forecast" component={ForecastPage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
+        </div>
+        <div className="footer">
+          <div>
+            <Image src='/SH_logo.svg' avatar />
+          </div>
+          © Created by Snowhound
         </div>
       </div>
     );

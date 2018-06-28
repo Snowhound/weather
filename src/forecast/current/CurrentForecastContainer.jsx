@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getCurrentForecast } from '../services/WeatherService';
+import { getCurrentForecast } from '../../services/WeatherService';
 import CurrentForecast from './CurrentForecast';
 
 class CurrentForecastContainer extends React.Component {

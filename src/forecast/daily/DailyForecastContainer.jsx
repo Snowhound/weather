@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getDailyForecast } from '../services/WeatherService';
+import { getDailyForecast } from '../../services/WeatherService';
 import DailyForecast from './DailyForecast';
 
 class DailyForecastContainer extends Component {
