@@ -12,6 +12,7 @@ const FiveDayForecast = (props) => {
                 (forecast, index) => {
                     return (
                         <DailyForecastCard
+                            key={forecast.day}
                             forecast={forecast}
                             index={index}
                             city={props.city}

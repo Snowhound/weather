@@ -5,7 +5,7 @@
 .appHeader {
   height: 150px;
   max-height: 150px;
-  background-color: #3e62a4;
+  background-color: #375b9f;
   overflow: hidden;
 }
 
@@ -52,4 +52,13 @@
 .mainPageWeatherCard {
   max-width: 250px;
   padding: 20px;
+}
+
+.logoLocation{
+  text-align: left;
+  display: inline-flex;
+}
+
+.logo {
+  width: 175px;
 }

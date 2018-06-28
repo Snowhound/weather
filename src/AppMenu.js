@@ -16,7 +16,6 @@ class AppMenu extends React.Component {
                 <Menu.Item
                     name='Tartu'
                     onClick={() => {
-                        console.log(this.props.history);
                         this.props.history.push("/forecast/tartu");
                     }}
                 />

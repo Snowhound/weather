@@ -11,16 +11,23 @@ import NotFoundPage from './NotFoundPage';
 
 ReactChartkick.addAdapter(Chart);
 
-
 class App extends Component {
 
   render() {
     return (
       <div className="app">
         <header className="appHeader">
-          <video autoPlay loop muted>
-            <source src="/HeaderVideo.mp4" type="video/mp4" />
-          </video>
+          <div className="logoLocation">
+          <span>
+            <img src="/SH_logo.svg" className="logo" alt="logo" />
+            </span>
+            <span>
+            <video autoPlay loop muted>
+              <source src="/HeaderVideo.mp4" type="video/mp4" />
+            </video>
+            </span>
+          </div>
+
         </header>
         <div>
           <BrowserRouter>

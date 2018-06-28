@@ -28,7 +28,6 @@ class HourlyForecastContainer extends Component {
         const city = props.match.params.city || "tartu";
         const index = props.match.params.index;
         const day = moment().add(index, 'd').startOf('day');
-        console.log(day);
         return {
             loading: true,
             index: index,
@@ -58,6 +57,7 @@ class HourlyForecastContainer extends Component {
             <HourlyForecast 
             loading = {this.state.loading}
             forecasts={this.state.forecasts}
+            day={this.state.day}
             />
         );
     }
