@@ -18,9 +18,12 @@ class App extends Component {
     return (
       <div className="app">
         <header className="appHeader">
+          <div className="appTitle">
+            WeatherApp
+            </div>
           <video autoPlay loop muted>
-            <source src="/HeaderVideo.mp4" type="video/mp4" />
-          </video>
+              <source src="/HeaderVideo.mp4" type="video/mp4" />
+            </video>
         </header>
         <div className="content">
           <div>
@@ -39,10 +42,10 @@ class App extends Component {
           © Created by Snowhound
         </div>
       </div>
-    );
-  }
-}
-
-
-
-export default App;
+        );
+      }
+    }
+    
+    
+    
+    export default App;
