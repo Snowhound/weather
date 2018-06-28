@@ -6,6 +6,10 @@ const initialState = {
 }
 
 
+export const currentForecastByCity = (state, city) => {
+    return state.forecast.current.forecastsPerCity[city] || {};
+} 
+
 const CurrentForecastReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCH_CURRENT_FORECASTS_REQUEST':

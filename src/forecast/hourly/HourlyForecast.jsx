@@ -1,11 +1,9 @@
 import React from 'react';
-import { Container, Dimmer, Loader } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { LineChart } from 'react-chartkick';
 import PropTypes from 'prop-types';
 
 import { fullDays } from '../../services/DateUtil';
-
-
 
 const HourlyForecast = (props) => {
     return (

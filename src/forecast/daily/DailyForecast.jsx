@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Dimmer, Loader, Container, Header } from 'semantic-ui-react';
+import { Card, Container, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
