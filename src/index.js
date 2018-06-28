@@ -6,7 +6,6 @@ import store, { history } from './store';
 
 import './index.css';
 import App from './App';
-import initializeApiData from './dataInitializer';
 import registerServiceWorker from './registerServiceWorker';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -20,8 +19,5 @@ ReactDOM.render(
     , document.getElementById('root'));
 
 // fetch initial data
-
-
-initializeApiData(store);
 
 registerServiceWorker();

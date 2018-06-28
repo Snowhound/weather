@@ -3,6 +3,7 @@ import { Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 import { WeatherComponent } from '../ForecastCard';
+import CurrentForecastFetcher from './CurrentForecastFetcher';
 
 const CurrentForecast = (props) => {
     return (
@@ -10,6 +11,7 @@ const CurrentForecast = (props) => {
             <Card>
                 <Card.Header className="cityName">{props.cityName}</Card.Header>
                 <Card.Meta>{props.forecast.description}</Card.Meta>
+                <CurrentForecastFetcher city={props.city} />
                 <CurrentWeatherComponent 
                     iconId = {props.forecast.iconId}
                 />
@@ -34,6 +36,7 @@ const CurrentWeatherComponent = (props) => {
 }
 
 CurrentForecast.propTypes = {
+    city: PropTypes.string.isRequired,
     cityName: PropTypes.string.isRequired,
     forecast: PropTypes.object.isRequired,
 }

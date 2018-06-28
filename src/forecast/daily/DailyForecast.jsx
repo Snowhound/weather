@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ForecastCard from '../ForecastCard';
+import DailyForecastFetcher from './DailyForecastFetcher';
 
 const FiveDayForecast = (props) => {
     return (
@@ -39,6 +40,7 @@ const DailyForecastCard = ({ city, forecast, index }) => {
 const DailyForecast = (props) => {
     return (
         <Container>
+            <DailyForecastFetcher city={props.city} />
             <Header as='h2'>Forecast of {props.cityName}</Header>
             <FiveDayForecast
                 city={props.city}

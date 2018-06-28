@@ -16,6 +16,7 @@ const mapStateToProps = (state, props) => {
     
     return {
         day: day,
+        city: city,
         forecasts: forecastsByCityAndDay(state, city, day),
         loading: state.forecast.daily.fetching
     }

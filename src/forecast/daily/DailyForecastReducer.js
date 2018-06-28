@@ -5,6 +5,14 @@ const initialState = {
     forecastsPerCity: {}
 }
 
+export const dailyForecastsByCity = (state, city) => {
+    return state.forecast.daily.forecastsPerCity[city] || [];
+}
+
+export const dailyForecastsLoaded = (state, city) => {
+    return !!state.forecast.daily.forecastsPerCity[city]
+}
+
 
 const DailyForecastReducer = (state = initialState, action) => {
     switch (action.type) {

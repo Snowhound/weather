@@ -5,6 +5,13 @@ const initialState = {
     forecastsPerCity: {}
 }
 
+export const currentForecastsByCity = (state, city) => {
+    return state.forecast.current.forecastsPerCity[city] || [];
+}
+
+export const currentForecastsLoaded = (state, city) => {
+    return !!state.forecast.current.forecastsPerCity[city]
+}
 
 export const currentForecastByCity = (state, city) => {
     return state.forecast.current.forecastsPerCity[city] || {};

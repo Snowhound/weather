@@ -6,6 +6,14 @@ const initialState = {
 }
 
 
+export const hourlyForecastsByCity = (state, city) => {
+    return state.forecast.hourly.forecastsPerCity[city] || [];
+}
+
+export const hourlyForecastsLoaded = (state, city) => {
+    return !!state.forecast.hourly.forecastsPerCity[city]
+}
+
 const HourlyForecastReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'FETCH_HOURLY_FORECASTS_REQUEST':

@@ -8,6 +8,7 @@ const capitalizeFirstLetter = (string) => {
 
 const mapStateToProps = (state, props) => {
     return {
+        city: props.city,
         cityName: capitalizeFirstLetter(props.city),
         forecast: currentForecastByCity(state, props.city),
     }
