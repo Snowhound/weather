@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReactChartkick from 'react-chartkick';
 import Chart from 'chart.js';
+import { Image } from 'semantic-ui-react';
 
 import AppMenu from './AppMenu';
 import ForecastPage from './forecast/ForecastPage';
@@ -21,7 +22,7 @@ class App extends Component {
             <source src="/HeaderVideo.mp4" type="video/mp4" />
           </video>
         </header>
-        <div>
+        <div className="content">
           <BrowserRouter>
             <div>
               <AppMenu />
@@ -34,6 +35,9 @@ class App extends Component {
           </BrowserRouter>
         </div>
         <div className="footer">
+          <div>
+            <Image src='/SH_logo.svg' avatar />
+          </div>
           © Created by Snowhound
         </div>
       </div>

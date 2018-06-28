@@ -58,6 +58,11 @@
   width: 100%;
   bottom: 0;
   text-align: center;
+  padding-top: 400px;
   padding-bottom: 20px;
   color: gray;
+}
+
+.content {
+  min-height: 100%;
 }
