@@ -1,60 +1,23 @@
-import React, { Component } from 'react';
-
-import { getDailyForecast } from '../../services/WeatherService';
+import { connect } from 'react-redux';
 import DailyForecast from './DailyForecast';
 
-class DailyForecastContainer extends Component {
-    constructor(props) {
-        super(props);
-        const city = props.match.params.city || "tartu";
-        this.state = this.initialState(city);
-    }
-
-    componentWillReceiveProps(props) {
-        const city = props.match.params.city || "tartu";
-        if (this.state.city !== city) {
-            this.setState(this.initialState(city));
-            this.updateForecasts();
-        }
-    }
-
-    componentWillMount() {
-        this.updateForecasts();
-    }
-
-    initialState(city) {
-        return {
-            loading: true,
-            forecasts: [],
-            city: city,
-            cityName: this.capitalizeFirstLetter(city)
-        }
-    }
-
-    capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    updateForecasts() {
-        getDailyForecast(this.state.cityName)
-            .then((forecasts) => {
-                this.setState({
-                    loading: false,
-                    forecasts: forecasts
-                })
-            });
-    }
-
-    render() {
-        return (
-            <DailyForecast
-                city={this.state.city}
-                forecasts={this.state.forecasts}
-                loading={this.state.loading}
-                cityName={this.state.cityName}
-            />
-        );
-    }
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default DailyForecastContainer;
+const forecastsByCity = (state, city) => {
+    return state.forecast.daily.forecastsPerCity[city] || [];
+} 
+
+const mapStateToProps = (state, props) => {
+    const city = props.match.params.city || "tartu";
+    return {
+        city: city,
+        cityName: capitalizeFirstLetter(city),
+        forecasts: forecastsByCity(state, city),
+        loading: state.forecast.daily.fetching
+    }
+};
+
+
+export default connect(mapStateToProps)(DailyForecast);

@@ -11,11 +11,11 @@ export const getDailyForecast = (city) => {
 
 }
 
-export const getHourlyForecast = (city, day) => {
+export const getHourlyForecast = (city) => {
     const params = { q: `${city},EE` };
 
     return API.get('/forecast', { params: params })
-        .then((response) => mapHourlyForecast(response.data, day))
+        .then((response) => mapHourlyForecast(response.data))
         .catch(console.error);
 
 }
@@ -42,16 +42,13 @@ const mapDailyForecast = (data) => {
     return dailyForecast;
 }
 
-export const mapHourlyForecast = (data, day) => {
-
-    const filteredByDay = data.list.filter((listItem) => {
-        return dateFromTimestamp(listItem.dt).startOf('day').isSame(day);
-    });
-
-    const results = filteredByDay.map((listItem) => {
+export const mapHourlyForecast = (data) => {
+    return data.list.map((listItem) => {
         const weather = listItem.weather[0];
         const time = dateFromTimestamp(listItem.dt).format('HH:mm');
+        const date = dateFromTimestamp(listItem.dt);
         return {
+            day: date.startOf('day'),
             time: time,
             minDegree: listItem.main.temp_min.toFixed(1),
             maxDegree: listItem.main.temp_max.toFixed(1),
@@ -60,8 +57,6 @@ export const mapHourlyForecast = (data, day) => {
             description: weather.description
         };
     });
-  
-    return results;
 }
 
 export const mapCurrentForecast = (data) => {
