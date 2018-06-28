@@ -54,11 +54,11 @@
   padding: 20px;
 }
 
-.logoLocation{
-  text-align: left;
-  display: inline-flex;
-}
-
-.logo {
-  width: 175px;
+.footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  padding-bottom: 20px;
+  color: gray;
 }

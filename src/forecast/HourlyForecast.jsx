@@ -32,7 +32,9 @@ const mapForecastToChart = (hourlyForecasts) => {
 
 const HourlyLineChart = (props) => {
     if (!props.loading) {
-        return <LineChart data={mapForecastToChart(props.forecasts)} />
+        return <LineChart 
+        ytitle="Temperature °C"
+        data={mapForecastToChart(props.forecasts)} />
     }
     return null;
 }

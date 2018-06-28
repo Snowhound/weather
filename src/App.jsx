@@ -17,17 +17,9 @@ class App extends Component {
     return (
       <div className="app">
         <header className="appHeader">
-          <div className="logoLocation">
-          <span>
-            <img src="/SH_logo.svg" className="logo" alt="logo" />
-            </span>
-            <span>
-            <video autoPlay loop muted>
-              <source src="/HeaderVideo.mp4" type="video/mp4" />
-            </video>
-            </span>
-          </div>
-
+          <video autoPlay loop muted>
+            <source src="/HeaderVideo.mp4" type="video/mp4" />
+          </video>
         </header>
         <div>
           <BrowserRouter>
@@ -40,6 +32,9 @@ class App extends Component {
               </Switch>
             </div>
           </BrowserRouter>
+        </div>
+        <div className="footer">
+          © Created by Snowhound
         </div>
       </div>
     );
