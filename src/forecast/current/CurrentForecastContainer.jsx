@@ -1,46 +1,20 @@
-import React from 'react';
-
-import { getCurrentForecast } from '../../services/WeatherService';
+import { connect } from 'react-redux';
 import CurrentForecast from './CurrentForecast';
 
-class CurrentForecastContainer extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            forecast: {},
-            cityName: this.capitalizeFirstLetter(this.props.city),
-            loading: true
-        }
-    }
-
-    componentWillMount() {
-        this.updateForecasts();
-    }
-
-    updateForecasts() {
-        return getCurrentForecast(this.state.cityName)
-            .then((forecast) => {
-                this.setState({
-                    loading: false,
-                    forecast: forecast
-                })
-            });
-    }
-
-    capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    render() {
-        return (
-            <CurrentForecast 
-            cityName = {this.state.cityName}
-            forecast = {this.state.forecast}
-            />
-
-        );
-    }
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default CurrentForecastContainer;
+const forecastByCity = (state, city) => {
+    return state.forecast.current.forecastsPerCity[city] || {};
+} 
+
+const mapStateToProps = (state, props) => {
+    return {
+        cityName: capitalizeFirstLetter(props.city),
+        forecast: forecastByCity(state, props.city),
+    }
+};
+
+
+export default connect(mapStateToProps)(CurrentForecast);

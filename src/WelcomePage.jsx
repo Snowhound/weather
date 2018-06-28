@@ -9,15 +9,11 @@ class WelcomePage extends React.Component {
         return (
             <div>
                 <Card.Group className="group" centered>
-                    <Link
-                        to={"/forecast/tartu"}
-                    >
-                        <CurrentForecastContainer city="Tartu" />
+                    <Link to={"/forecast/tartu"} >
+                        <CurrentForecastContainer city="tartu" />
                     </Link>
-                    <Link
-                        to={"/forecast/tallinn"}
-                    >
-                        <CurrentForecastContainer city="Tallinn" />
+                    <Link to={"/forecast/tallinn"} >
+                        <CurrentForecastContainer city="tallinn" />
                     </Link>
 
                 </Card.Group>
