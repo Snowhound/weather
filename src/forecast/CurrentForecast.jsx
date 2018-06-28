@@ -35,7 +35,7 @@ const CurrentWeatherComponent = (props) => {
 
 CurrentForecast.propTypes = {
     cityName: PropTypes.string.isRequired,
-    forecasts: PropTypes.array.isRequired,
+    forecast: PropTypes.object.isRequired,
 }
 
 export default CurrentForecast;

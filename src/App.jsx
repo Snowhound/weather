@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import ReactChartkick from 'react-chartkick';
 import Chart from 'chart.js';
 
@@ -30,7 +30,6 @@ class App extends Component {
 
         </header>
         <div>
-          <BrowserRouter>
             <div>
               <AppMenu />
               <Switch>
@@ -39,7 +38,6 @@ class App extends Component {
                 <Route component={NotFoundPage} />
               </Switch>
             </div>
-          </BrowserRouter>
         </div>
       </div>
     );
