@@ -9,6 +9,7 @@ import ForecastPage from './forecast/ForecastPage';
 import './App.css';
 import WelcomePage from './WelcomePage';
 import NotFoundPage from './NotFoundPage';
+import LoaderContainer from './forecast/LoaderContainer';
 
 ReactChartkick.addAdapter(Chart);
 
@@ -28,6 +29,7 @@ class App extends Component {
         <div className="content">
           <div>
             <AppMenu />
+            <LoaderContainer />
             <Switch>
               <Route exact path="/" component={WelcomePage} />
               <Route path="/forecast" component={ForecastPage} />

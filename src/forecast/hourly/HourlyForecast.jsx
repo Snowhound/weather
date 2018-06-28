@@ -10,13 +10,10 @@ import { fullDays } from '../../services/DateUtil';
 const HourlyForecast = (props) => {
     return (
         <Container>
-            <Dimmer active={props.loading} inverted>
-                <Loader inverted>Loading</Loader>
-            </Dimmer>
             <h2>{fullDays[props.day.day()]}'s weather</h2>
             <HourlyLineChart 
-            loading={props.loading}
             forecasts={props.forecasts}
+            loading={props.loading}
             />
         </Container>
     );
@@ -41,7 +38,7 @@ const HourlyLineChart = (props) => {
 
 HourlyForecast.propTypes = {
     forecasts: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired
 }
 
 export default HourlyForecast;

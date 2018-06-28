@@ -15,7 +15,6 @@ const mapStateToProps = (state, props) => {
         city: city,
         cityName: capitalizeFirstLetter(city),
         forecasts: forecastsByCity(state, city),
-        loading: state.forecast.daily.fetching
     }
 };
 

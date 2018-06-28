@@ -40,9 +40,6 @@ const DailyForecast = (props) => {
     return (
         <Container>
             <Header as='h2'>Forecast of {props.cityName}</Header>
-            <Dimmer active={props.loading} inverted>
-                <Loader inverted>Loading</Loader>
-            </Dimmer>
             <FiveDayForecast
                 city={props.city}
                 forecasts={props.forecasts}
@@ -55,7 +52,6 @@ DailyForecast.propTypes = {
     city: PropTypes.string.isRequired,
     cityName: PropTypes.string.isRequired,
     forecasts: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired
 }
 
 export default DailyForecast;
