@@ -18,33 +18,36 @@ class App extends Component {
     return (
       <div className="app">
         <header className="appHeader">
-          <video autoPlay loop muted>
-            <source src="/HeaderVideo.mp4" type="video/mp4" />
-          </video>
-        </header>
-        <div className="content">
-          <BrowserRouter>
-            <div>
-              <AppMenu />
-              <Switch>
-                <Route exact path="/" component={WelcomePage} />
-                <Route path="/forecast" component={ForecastPage} />
-                <Route component={NotFoundPage} />
-              </Switch>
+          <div className="appTitle">
+            WeatherApp
             </div>
-          </BrowserRouter>
-        </div>
-        <div className="footer">
-          <div>
-            <Image src='/SH_logo.svg' avatar />
+          <video autoPlay loop muted>
+              <source src="/HeaderVideo.mp4" type="video/mp4" />
+            </video>
+        </header>
+          <div className="content">
+            <BrowserRouter>
+              <div>
+                <AppMenu />
+                <Switch>
+                  <Route exact path="/" component={WelcomePage} />
+                  <Route path="/forecast" component={ForecastPage} />
+                  <Route component={NotFoundPage} />
+                </Switch>
+              </div>
+            </BrowserRouter>
           </div>
-          © Created by Snowhound
+          <div className="footer">
+            <div>
+              <Image src='/SH_logo.svg' avatar />
+            </div>
+            © Created by Snowhound
         </div>
       </div>
-    );
-  }
-}
-
-
-
-export default App;
+        );
+      }
+    }
+    
+    
+    
+    export default App;
